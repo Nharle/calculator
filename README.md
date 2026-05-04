@@ -1,0 +1,1 @@
+This project is just a simple calculator that is intended to improve my skills with front-end development.
