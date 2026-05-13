@@ -1,9 +1,10 @@
+//test
 let calcInput = document.querySelector(".calcInput");
 let calcButtons = document.querySelector(".calcButtons");
 let firstNumber = "";
 let operator = "";
 let secondNumber = "";
-
+let previousNumber;
 
 
 function add(a, b) {
@@ -21,16 +22,16 @@ function divide(a,b) {
 function operate(a,b) {
     switch(operator) {
         case "+":
-            add(a,b);
+            return add(a,b);
             break;
         case "-":
-            subtract(a,b);
+            return subtract(a,b);
             break;
         case "x":
-            multiply(a,b);
+            return multiply(a,b);
             break;
         case "/":
-            divide(a,b);
+            return divide(a,b);
             break;
     }
 }
@@ -159,6 +160,9 @@ function displayUpdate() {
                 break;
             case "division":
                 operator = "/";
+                break;
+            case "equal":
+                calcInput.value = operate(+firstNumber,+secondNumber);
                 break;
         }
     });
