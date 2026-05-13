@@ -1,4 +1,3 @@
-//test
 let calcInput = document.querySelector(".calcInput");
 let calcButtons = document.querySelector(".calcButtons");
 let firstNumber = "";
