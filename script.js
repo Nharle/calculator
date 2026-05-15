@@ -3,7 +3,7 @@ let calcButtons = document.querySelector(".calcButtons");
 let firstNumber = "";
 let operator = "";
 let secondNumber = "";
-let previousNumber;
+let calcUndefined = false;
 
 
 function add(a, b) {
@@ -40,106 +40,127 @@ function displayUpdate() {
     calcButtons.addEventListener("click", (e) => {
         let target = e.target;
         switch(target.id) {
+            
             case "0":
-                if(calcInput.value !== "0") {
-                if(operator === ""){
-                    firstNumber += 0;
-                    calcInput.value = firstNumber;
+                if(!calcUndefined){
+                    if(calcInput.value !== "0") {
+                    if(operator === ""){
+                        firstNumber += 0;
+                        calcInput.value = firstNumber;
+                    }
+                    else {
+                        secondNumber += 0;
+                        calcInput.value = secondNumber;
+                    }
                 }
-                else {
-                    secondNumber += 0;
-                    calcInput.value = secondNumber;
-                }
-                }
+            }
             break;
             case "1":
-                if(operator === ""){
+                if(!calcUndefined){
+                    if(operator === ""){
                     firstNumber += 1;
                     calcInput.value = firstNumber;
-                }
-                else {
+                    }
+                    else {
                     secondNumber +=1;
                     calcInput.value = secondNumber;
+                    }
                 }
                 break;
             case "2":
-                if(operator ===""){
-                    firstNumber += 2;
-                    calcInput.value = firstNumber;
-                }
-                else {
-                    secondNumber += 2;
-                    calcInput.value=secondNumber;
+                if(!calcUndefined){
+                    if(operator ===""){
+                        firstNumber += 2;
+                        calcInput.value = firstNumber;
+                    }
+                    else {
+                        secondNumber += 2;
+                        calcInput.value=secondNumber;
+                    }
                 }
                 break;
             case "3":
-                if(operator===""){
-                    firstNumber += 3;
-                    calcInput.value = firstNumber;
-                }
-                else {
-                    secondNumber +=3;
-                    calcInput.value=secondNumber;
+                if(!calcUndefined){
+                    if(operator===""){
+                        firstNumber += 3;
+                        calcInput.value = firstNumber;
+                    }
+                    else {
+                        secondNumber +=3;
+                        calcInput.value=secondNumber;
+                    }
                 }
                 break;
             case "4":
-                if(operator===""){
+                if(!calcUndefined){
+                    if(operator===""){
                     firstNumber += 4;
                     calcInput.value = firstNumber;
-                }
-                else {
-                    secondNumber +=4;
-                    calcInput.value = secondNumber;
+                    }
+                    else {
+                        secondNumber +=4;
+                        calcInput.value = secondNumber;
+                    }
                 }
                 break;
             case "5":
-                if(operator ===""){
+                if(!calcUndefined){
+                    if(operator ===""){
                     firstNumber += 5;
                     calcInput.value = firstNumber;
-                }
-                else{
-                    secondNumber +=5;
-                    calcInput.value=secondNumber;
+                    }
+                    else{
+                        secondNumber +=5;
+                        calcInput.value=secondNumber;
+                    }
                 }
                 break;
             case "6":
-                if(operator ===""){
-                    firstNumber += 6;
-                    calcInput.value = firstNumber;
-                }
-                else {
-                    secondNumber+=6;
-                    calcInput.value=secondNumber;
+                if(!calcUndefined){
+                    if(operator ===""){
+                        firstNumber += 6;
+                        calcInput.value = firstNumber;
+                    }
+                    else {
+                        secondNumber+=6;
+                        calcInput.value=secondNumber;
+                    }
                 }
                 break;
             case "7":
-                if(operator===""){
+                if(!calcUndefined){
+                    if(operator===""){
                     firstNumber += 7;
                     calcInput.value = firstNumber;
-                }
-                else{
-                    secondNumber+=7;
-                    calcInput.value=secondNumber;
+                    }
+                    else{
+                        secondNumber+=7;
+                        calcInput.value=secondNumber;
+                    }
                 }
                 break;
             case "8":
-                if(operator===""){
-                    firstNumber += 8;
-                    calcInput.value = firstNumber;
-                }
-                else{
-                    secondNumber+=8;
-                    calcInput.value=secondNumber;
+                if(!calcUndefined){
+                    if(operator===""){
+                        firstNumber += 8;
+                        calcInput.value = firstNumber;
+                    }
+                    else{
+                        secondNumber+=8;
+                        calcInput.value=secondNumber;
+                    }
                 }
                 break;
             case "9":
-                if(operator===""){
-                    firstNumber += 9;
-                    calcInput.value = firstNumber;
-                }
-                else{
-                    secondNumber+=9;
-                    calcInput.value = secondNumber;
+                if(!calcUndefined){
+                    if(operator===""){
+                        firstNumber += 9;
+                        calcInput.value = firstNumber;
+                    }
+                    else{
+                        secondNumber+=9;
+                        calcInput.value = secondNumber;
+                    }
                 }
                 break;  
             case "clear":
@@ -147,21 +168,92 @@ function displayUpdate() {
                 secondNumber="";
                 calcInput.value = "0";
                 operator = "";
+                calcUndefined = false;
                 break;        
             case "addition":
-                operator = "+";
+                console.log(`First Number: ${firstNumber} SecondNumber:${secondNumber}`);
+                if(firstNumber){
+                if(operator ==="" || operator==="+"){
+                    operator = "+";
+                }
+                else if (secondNumber){
+                    calcInput.value = operate(+firstNumber,+secondNumber);
+                    operator="+";
+                    firstNumber = calcInput.value;
+                    secondNumber = ""; 
+                }
+                else {
+
+                }
+                }
                 break;
             case "subtraction":
-                operator = "-";
+                console.log(`First Number: ${firstNumber} SecondNumber:${secondNumber}`);
+                if(firstNumber){
+                if(operator==="" || operator==="-"){
+                    operator = "-";
+                }
+                else if(secondNumber){
+                    calcInput.value = operate(+firstNumber,+secondNumber);
+                    operator="-";
+                    firstNumber = calcInput.value;
+                    secondNumber = ""; 
+                }
+                else {
+
+                }
+            }
                 break;
             case "multiplication":
-                operator = "x";
+                console.log(`First Number: ${firstNumber} SecondNumber:${secondNumber}`);
+                if(firstNumber){
+                if(operator==="" || operator==="x"){
+                    operator = "x";
+                }
+                else if(secondNumber){
+                    calcInput.value = operate(+firstNumber,+secondNumber);
+                    operator="x";
+                    firstNumber = calcInput.value;
+                    secondNumber = ""; 
+                }
+                else {
+
+                }
+                }
                 break;
             case "division":
-                operator = "/";
+                console.log(`First Number: ${firstNumber} SecondNumber:${secondNumber}`);
+                if(firstNumber){
+                if(operator==="" || operator==="/"){
+                    operator = "/";
+                }
+                else if(secondNumber){
+                    calcInput.value = operate(+firstNumber,+secondNumber);
+                    operator="/";
+                    firstNumber = calcInput.value;
+                    secondNumber = ""; 
+                }
+                else {
+
+                }
+                }
                 break;
             case "equal":
-                calcInput.value = operate(+firstNumber,+secondNumber);
+                if(firstNumber && secondNumber){
+                    if(secondNumber !== 0 && operator !=="/" || !calcUndefined){
+                        calcInput.value = operate(+firstNumber,+secondNumber);
+                        firstNumber = calcInput.value;
+                        operator="";
+                        secondNumber = ""; 
+                    }
+                    else {
+                        calcInput.value = "NaN";
+                        firstNumber = "";
+                        secondNumber = "";
+                        calcUndefined = true;
+                    }
+                }
+                console.log(`First Number: ${firstNumber} SecondNumber:${secondNumber}`);
                 break;
         }
     });
