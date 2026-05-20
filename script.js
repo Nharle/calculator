@@ -4,7 +4,7 @@ let firstNumber = "";
 let operator = "";
 let secondNumber = "";
 let calcUndefined = false;
-
+const calcSymbolsInvalid = "~`!@#$%^&()_+{[}]|\\;:'<>,?abcdefghijklmnopqrstuvwxyz";
 
 function add(a, b) {
     return a + b;
@@ -245,7 +245,7 @@ function displayUpdate() {
                         firstNumber = calcInput.value;
                         operator="";
                         secondNumber = ""; 
-                    }
+                    } 
                     else {
                         calcInput.value = "NaN";
                         firstNumber = "";
@@ -255,6 +255,18 @@ function displayUpdate() {
                 }
                 console.log(`First Number: ${firstNumber} SecondNumber:${secondNumber}`);
                 break;
+                case "decimal":
+                    if(!calcUndefined && !calcInput.value.includes(".")) {
+                        if(operator ===""){
+                            firstNumber += ".";
+                            calcInput.value = firstNumber;
+                        }
+                        else {
+                            secondNumber += ".";
+                            calcInput.value = secondNumber;
+                        }
+                    }
+                    break;
         }
     });
 }
