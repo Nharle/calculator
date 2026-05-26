@@ -18,6 +18,7 @@ function multiply(a,b) {
 function divide(a,b) {
     return a/b;
 }
+
 function operate(a,b) {
     switch(operator) {
         case "+":
@@ -35,6 +36,19 @@ function operate(a,b) {
     }
 }
 
+function handleNums(num) {
+    if(!calcUndefined) {
+        if(operator === ""){
+            firstNumber += num;
+            calcInput.value = firstNumber;
+            }
+        else {
+            secondNumber += num;
+            calcInput.value = secondNumber;
+            }
+    }
+}
+
 function displayUpdate() {
     calcInput.value = "0";
     calcButtons.addEventListener("click", (e) => {
@@ -42,126 +56,36 @@ function displayUpdate() {
         switch(target.id) {
             
             case "0":
-                if(!calcUndefined){
-                    if(calcInput.value !== "0") {
-                    if(operator === ""){
-                        firstNumber += 0;
-                        calcInput.value = firstNumber;
-                    }
-                    else {
-                        secondNumber += 0;
-                        calcInput.value = secondNumber;
-                    }
+                if(calcInput.value !== "0") {
+                    handleNums(0);
                 }
-            }
             break;
             case "1":
-                if(!calcUndefined){
-                    if(operator === ""){
-                    firstNumber += 1;
-                    calcInput.value = firstNumber;
-                    }
-                    else {
-                    secondNumber +=1;
-                    calcInput.value = secondNumber;
-                    }
-                }
+               handleNums(1);
                 break;
             case "2":
-                if(!calcUndefined){
-                    if(operator ===""){
-                        firstNumber += 2;
-                        calcInput.value = firstNumber;
-                    }
-                    else {
-                        secondNumber += 2;
-                        calcInput.value=secondNumber;
-                    }
-                }
+                handleNums(2);
                 break;
             case "3":
-                if(!calcUndefined){
-                    if(operator===""){
-                        firstNumber += 3;
-                        calcInput.value = firstNumber;
-                    }
-                    else {
-                        secondNumber +=3;
-                        calcInput.value=secondNumber;
-                    }
-                }
+                handleNums(3);
                 break;
             case "4":
-                if(!calcUndefined){
-                    if(operator===""){
-                    firstNumber += 4;
-                    calcInput.value = firstNumber;
-                    }
-                    else {
-                        secondNumber +=4;
-                        calcInput.value = secondNumber;
-                    }
-                }
+                handleNums(4);
                 break;
             case "5":
-                if(!calcUndefined){
-                    if(operator ===""){
-                    firstNumber += 5;
-                    calcInput.value = firstNumber;
-                    }
-                    else{
-                        secondNumber +=5;
-                        calcInput.value=secondNumber;
-                    }
-                }
+                handleNums(5);
                 break;
             case "6":
-                if(!calcUndefined){
-                    if(operator ===""){
-                        firstNumber += 6;
-                        calcInput.value = firstNumber;
-                    }
-                    else {
-                        secondNumber+=6;
-                        calcInput.value=secondNumber;
-                    }
-                }
+                handleNums(6);
                 break;
             case "7":
-                if(!calcUndefined){
-                    if(operator===""){
-                    firstNumber += 7;
-                    calcInput.value = firstNumber;
-                    }
-                    else{
-                        secondNumber+=7;
-                        calcInput.value=secondNumber;
-                    }
-                }
+                handleNums(7);
                 break;
             case "8":
-                if(!calcUndefined){
-                    if(operator===""){
-                        firstNumber += 8;
-                        calcInput.value = firstNumber;
-                    }
-                    else{
-                        secondNumber+=8;
-                        calcInput.value=secondNumber;
-                    }
-                }
+                handleNums(8);
                 break;
             case "9":
-                if(!calcUndefined){
-                    if(operator===""){
-                        firstNumber += 9;
-                        calcInput.value = firstNumber;
-                    }
-                    else{
-                        secondNumber+=9;
-                        calcInput.value = secondNumber;
-                    }
-                }
+                handleNums(9);
                 break;  
             case "clear":
                 firstNumber = "";
@@ -268,6 +192,9 @@ function displayUpdate() {
                     }
                     break;
         }
+    });
+    calcInput.addEventListener("keydown", (e) => {
+        console.log(e);
     });
 }
 

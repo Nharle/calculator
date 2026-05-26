@@ -4,6 +4,8 @@
     margin:0;
 }
 .calcContainer {
+    margin:auto;
+    margin-top:24px;
     display:flex;
     flex-direction: column;
     border:solid;
