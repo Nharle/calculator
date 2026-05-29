@@ -4,7 +4,7 @@ let firstNumber = "";
 let operator = "";
 let secondNumber = "";
 let calcUndefined = false;
-const calcSymbolsInvalid = "~`!@#$%^&()_+{[}]|\\;:'<>,?abcdefghijklmnopqrstuvwxyz";
+
 
 function add(a, b) {
     return a + b;
@@ -46,6 +46,105 @@ function handleNums(num) {
             secondNumber += num;
             calcInput.value = secondNumber;
             }
+    }
+}
+function handleSymbol(sym) {
+    console.log(`FirstNumber: ${firstNumber}, SecondNumber: ${secondNumber}, operator:${operator}, calcUndefined ${calcUndefined}`);
+    if(!calcUndefined){
+        if(sym === "+" || sym === "-" || sym === "x" || sym === "/"){
+            if(firstNumber){
+                if(operator ==="" || operator===sym){
+                    operator = sym;
+                }
+                else if (secondNumber){
+                    if(+secondNumber === 0 && operator === "/"){
+                        calcInput.value = NaN;
+                        firstNumber = "";
+                        secondNumber = "";
+                        calcUndefined = true;
+                    }
+                    else {
+                        calcInput.value = operate(+firstNumber,+secondNumber);
+                        operator=sym;
+                        firstNumber = calcInput.value;
+                        secondNumber = ""; 
+                    }
+                }
+                else {
+
+                }
+            }
+        }
+        else if (sym === "=") {
+        if(firstNumber && secondNumber){
+            if(+secondNumber === 0 && operator === "/") {
+                calcInput.value = NaN;
+                firstNumber = "";
+                secondNumber = "";
+                calcUndefined = true;
+                    }
+            else {
+                calcInput.value = operate(+firstNumber,+secondNumber);
+                firstNumber = calcInput.value;
+                operator="";
+                secondNumber = ""; 
+                    } 
+
+                }
+        }
+        else if(sym ===".") {
+            if(!calcUndefined && !calcInput.value.includes(".")) {
+                if(operator ===""){
+                    firstNumber += ".";
+                    calcInput.value = firstNumber;
+                    }
+                else {
+                    secondNumber += ".";
+                    calcInput.value = secondNumber;
+                    }
+                }
+        }
+    }
+}
+
+function handleInput(e) {
+    key = e.key;
+    console.log(key);
+    e.preventDefault();
+    if(!Number.isNaN(+key)) {
+        if(+key === 0) {
+            if(calcInput.value !== "0") {
+                handleNums(+key);
+            }
+            else {
+                e.preventDefault();
+            }
+        }
+        else {
+            handleNums(+key);
+        }
+    }
+    else if(Number.isNaN(+key)) {
+        if(key === "+" || key === "-" || key === "x" || key === "/" || key === "=" || key ===".") {
+            handleSymbol(key);
+        }
+        else if(key ==="Enter") {
+            handleSymbol("=");
+        }
+        else if(key ==="Backspace") {
+            let numArr = calcInput.value.split("");
+            numArr.pop();
+            calcInput.value = numArr.join("");
+            if(!operator) {
+                firstNumber = calcInput.value;
+            }
+            else {
+                secondNumber = calcInput.value;
+            }
+        }
+        else {
+            e.preventDefault();
+        }
     }
 }
 
@@ -96,106 +195,30 @@ function displayUpdate() {
                 break;        
             case "addition":
                 console.log(`First Number: ${firstNumber} SecondNumber:${secondNumber}`);
-                if(firstNumber){
-                if(operator ==="" || operator==="+"){
-                    operator = "+";
-                }
-                else if (secondNumber){
-                    calcInput.value = operate(+firstNumber,+secondNumber);
-                    operator="+";
-                    firstNumber = calcInput.value;
-                    secondNumber = ""; 
-                }
-                else {
-
-                }
-                }
+                handleSymbol("+");
                 break;
             case "subtraction":
                 console.log(`First Number: ${firstNumber} SecondNumber:${secondNumber}`);
-                if(firstNumber){
-                if(operator==="" || operator==="-"){
-                    operator = "-";
-                }
-                else if(secondNumber){
-                    calcInput.value = operate(+firstNumber,+secondNumber);
-                    operator="-";
-                    firstNumber = calcInput.value;
-                    secondNumber = ""; 
-                }
-                else {
-
-                }
-            }
+                handleSymbol("-");
                 break;
             case "multiplication":
                 console.log(`First Number: ${firstNumber} SecondNumber:${secondNumber}`);
-                if(firstNumber){
-                if(operator==="" || operator==="x"){
-                    operator = "x";
-                }
-                else if(secondNumber){
-                    calcInput.value = operate(+firstNumber,+secondNumber);
-                    operator="x";
-                    firstNumber = calcInput.value;
-                    secondNumber = ""; 
-                }
-                else {
-
-                }
-                }
+                handleSymbol("x");
                 break;
             case "division":
                 console.log(`First Number: ${firstNumber} SecondNumber:${secondNumber}`);
-                if(firstNumber){
-                if(operator==="" || operator==="/"){
-                    operator = "/";
-                }
-                else if(secondNumber){
-                    calcInput.value = operate(+firstNumber,+secondNumber);
-                    operator="/";
-                    firstNumber = calcInput.value;
-                    secondNumber = ""; 
-                }
-                else {
-
-                }
-                }
+                handleSymbol("/");
                 break;
             case "equal":
-                if(firstNumber && secondNumber){
-                    if(secondNumber !== 0 && operator !=="/" || !calcUndefined){
-                        calcInput.value = operate(+firstNumber,+secondNumber);
-                        firstNumber = calcInput.value;
-                        operator="";
-                        secondNumber = ""; 
-                    } 
-                    else {
-                        calcInput.value = "NaN";
-                        firstNumber = "";
-                        secondNumber = "";
-                        calcUndefined = true;
-                    }
-                }
+               handleSymbol("=");
                 console.log(`First Number: ${firstNumber} SecondNumber:${secondNumber}`);
                 break;
                 case "decimal":
-                    if(!calcUndefined && !calcInput.value.includes(".")) {
-                        if(operator ===""){
-                            firstNumber += ".";
-                            calcInput.value = firstNumber;
-                        }
-                        else {
-                            secondNumber += ".";
-                            calcInput.value = secondNumber;
-                        }
-                    }
+                   handleSymbol(".");
                     break;
         }
     });
-    calcInput.addEventListener("keydown", (e) => {
-        console.log(e);
-    });
+    calcInput.addEventListener("keydown", handleInput);
 }
 
 displayUpdate();
