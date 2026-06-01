@@ -128,6 +128,9 @@ function handleInput(e) {
         if(key === "+" || key === "-" || key === "x" || key === "/" || key === "=" || key ===".") {
             handleSymbol(key);
         }
+        else if(key === "*") {
+            handleSymbol("x");
+        }
         else if(key ==="Enter") {
             handleSymbol("=");
         }
