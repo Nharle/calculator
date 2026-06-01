@@ -40,7 +40,7 @@ function handleNums(num) {
     if(!calcUndefined) {
         if(operator === ""){
             if(firstNumber !== "0"){
-                firstNumber += num;
+                firstNumber += `${num}`;
             }
             else {
                 firstNumber = `${num}`;
@@ -49,7 +49,7 @@ function handleNums(num) {
             }
         else {
             if(secondNumber !== "0"){
-                secondNumber += num;
+                secondNumber += `${num}`;
             }
             else {
                 secondNumber = `${num}`;
@@ -104,6 +104,7 @@ function handleSymbol(sym) {
         }
         else if(sym ===".") {
             if(!calcUndefined && !calcInput.value.includes(".")) {
+                console.log(true);
                 if(operator ===""){
                     firstNumber += ".";
                     calcInput.value = firstNumber;
@@ -138,7 +139,7 @@ function handleInput(e) {
         if(key === "+" || key === "-" || key === "x" || key === "/" || key === "=" || key ===".") {
             handleSymbol(key);
             if(key !== "=") {
-                if(!calcInput.value.includes("+") && !calcInput.value.includes("-") && !calcInput.value.includes("x") && !calcInput.value.includes("/") && !calcUndefined){
+                if(!calcInput.value.includes("+") && !calcInput.value.includes("-") && !calcInput.value.includes("x") && !calcInput.value.includes("/") && !calcUndefined && key !== "."){
                 calcInput.value += key;
                 }
             }
