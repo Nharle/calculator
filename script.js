@@ -134,7 +134,7 @@ function handleInput(e) {
         else if(key ==="Enter") {
             handleSymbol("=");
         }
-        else if(key ==="Backspace") {
+        else if(key ==="Backspace" && !calcUndefined) {
             let numArr = calcInput.value.split("");
             numArr.pop();
             calcInput.value = numArr.join("");
