@@ -39,11 +39,21 @@ function operate(a,b) {
 function handleNums(num) {
     if(!calcUndefined) {
         if(operator === ""){
-            firstNumber += num;
+            if(firstNumber !== "0"){
+                firstNumber += num;
+            }
+            else {
+                firstNumber = `${num}`;
+            }
             calcInput.value = firstNumber;
             }
         else {
-            secondNumber += num;
+            if(secondNumber !== "0"){
+                secondNumber += num;
+            }
+            else {
+                secondNumber = `${num}`;
+            }
             calcInput.value = secondNumber;
             }
     }
@@ -127,9 +137,17 @@ function handleInput(e) {
     else if(Number.isNaN(+key)) {
         if(key === "+" || key === "-" || key === "x" || key === "/" || key === "=" || key ===".") {
             handleSymbol(key);
+            if(key !== "=") {
+                if(!calcInput.value.includes("+") && !calcInput.value.includes("-") && !calcInput.value.includes("x") && !calcInput.value.includes("/") && !calcUndefined){
+                calcInput.value += key;
+                }
+            }
         }
         else if(key === "*") {
             handleSymbol("x");
+            if(!calcInput.value.includes("x")) {
+                calcInput.value += "x";
+            }
         }
         else if(key ==="Enter") {
             handleSymbol("=");
